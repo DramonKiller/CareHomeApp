@@ -1,13 +1,16 @@
-﻿using Dramonkiller.HappyGrandpaCareHome.Core.Models.General;
+﻿using Dramonkiller.HappyGrandpaCareHome.Core.Extensions;
+using Dramonkiller.HappyGrandpaCareHome.Core.Models.General;
 using Dramonkiller.HappyGrandpaCareHome.Core.Models.Residents;
 using System.Data.Entity;
 
-namespace Dramonkiller.HappyGrandpaCareHome.Core.Models
+namespace Dramonkiller.HappyGrandpaCareHome.Core.Models.Initializer
 {
     internal class DatabaseContexInitializer : 
         DropCreateDatabaseAlways<DatabaseContext> 
         //DropCreateDatabaseIfModelChanges<DatabaseContext>
     {
+        private const int ImageSize = 100;
+
         protected override void Seed(DatabaseContext context)
         {
             CareHome careHome = new CareHome
@@ -21,7 +24,8 @@ namespace Dramonkiller.HappyGrandpaCareHome.Core.Models
             {
                 Name = "Pepe",
                 Middle = "Pérez",
-                Surname = "Ramírez"
+                Surname = "Ramírez",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0001.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
             context.Residents.Add(resident1);
@@ -30,7 +34,8 @@ namespace Dramonkiller.HappyGrandpaCareHome.Core.Models
             {
                 Name = "María",
                 Middle = "Martinez",
-                Surname = "Sánchez"
+                Surname = "Sánchez",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0003.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
             context.Residents.Add(resident2);

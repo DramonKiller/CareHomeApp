@@ -38,6 +38,19 @@ namespace Dramonkiller.HappyGrandpaCareHome.WebServer.Controllers
             return Ok(resident);
         }
 
+        [Route("resident/{id}/photo")]
+        public async Task<IHttpActionResult> GetResidentPhoto(int id)
+        {
+            Resident resident = await db.Residents.FindAsync(id);
+
+            if (resident == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(resident.PhotoData != null ? resident.PhotoData.Photo : null);
+        }
+
         // PUT: api/Residents/5
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutResident(int id, Resident resident)

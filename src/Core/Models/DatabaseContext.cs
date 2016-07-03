@@ -1,5 +1,6 @@
 ﻿using Dramonkiller.HappyGrandpaCareHome.Core.Models.General;
 using Dramonkiller.HappyGrandpaCareHome.Core.Models.General.Configurations;
+using Dramonkiller.HappyGrandpaCareHome.Core.Models.Initializer;
 using Dramonkiller.HappyGrandpaCareHome.Core.Models.Residents;
 using Dramonkiller.HappyGrandpaCareHome.Core.Models.Residents.Configurations;
 using System.Data.Entity;
@@ -11,6 +12,11 @@ namespace Dramonkiller.HappyGrandpaCareHome.Core.Models
         static DatabaseContext()
         {
             Database.SetInitializer(new DatabaseContexInitializer());
+        }
+
+        public DatabaseContext() 
+            : base(@"Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=true;AttachDBFilename=|DataDirectory|\Database.mdf")
+        {
         }
 
         #region Collections
@@ -34,6 +40,7 @@ namespace Dramonkiller.HappyGrandpaCareHome.Core.Models
             #region General
 
             modelBuilder.Configurations.Add(new ResidentConfiguration());
+            modelBuilder.Configurations.Add(new ResidentPhotoConfiguration());
 
             #endregion
 

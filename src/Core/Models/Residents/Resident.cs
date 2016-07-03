@@ -10,6 +10,6 @@
 
         public string Surname { get; set; }
 
-        public byte[] Photo { get; set; }
+        public virtual ResidentPhoto PhotoData { get; set; }
     }
 }

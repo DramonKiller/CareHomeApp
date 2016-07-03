@@ -4,16 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9D916741-1D29-42C0-9472-C4750E3B56E8}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{3AF55945-7555-41C9-AC8A-E689EA0CB756}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dramonkiller.HappyGrandpaCareHome.Core</RootNamespace>
-    <AssemblyName>Dramonkiller.HappyGrandpaCareHome.Core</AssemblyName>
+    <RootNamespace>Dramonkiller.HappyGrandpaCareHome.Core.Test</RootNamespace>
+    <AssemblyName>Dramonkiller.HappyGrandpaCareHome.Core.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,6 +25,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,7 +45,6 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,60 +53,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="Extensions\IDbSetExtensions.cs" />
-    <Compile Include="Extensions\ImageExtensions.cs" />
-    <Compile Include="Models\Initializer\DatabaseContexInitializer.cs" />
-    <Compile Include="Models\DatabaseContext.cs" />
-    <Compile Include="Models\General\CareHome.cs" />
-    <Compile Include="Models\General\Configurations\CareHomeConfiguration.cs" />
-    <Compile Include="Models\Initializer\ImagesResource.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ImagesResource.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Residents\Configurations\ResidentConfiguration.cs" />
-    <Compile Include="Models\Residents\Configurations\ResidentPhotoConfiguration.cs" />
-    <Compile Include="Models\Residents\Resident.cs" />
-    <Compile Include="Models\Residents\ResidentPhoto.cs" />
-    <Compile Include="Models\Users\User.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Models\Initializer\ImagesResource.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>ImagesResource.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RES0001.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RES0002.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RES0003.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RES0004.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RES0005.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RES0006.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RES0007.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\RES0008.jpg" />
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{9d916741-1d29-42c0-9472-c4750e3b56e8}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

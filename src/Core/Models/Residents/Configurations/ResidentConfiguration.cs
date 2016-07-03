@@ -15,7 +15,8 @@ namespace Dramonkiller.HappyGrandpaCareHome.Core.Models.Residents.Configurations
             this.Property(x => x.Name).IsRequired().HasMaxLength(50);
             this.Property(x => x.Middle).IsOptional().HasMaxLength(50);
             this.Property(x => x.Surname).IsOptional().HasMaxLength(50);
-            this.Property(x => x.Photo).IsOptional();
+
+            this.HasOptional(x => x.PhotoData).WithOptionalPrincipal(r => r.Resident).Map(m => m.MapKey("ResidentId"));
         }
     }
 }
