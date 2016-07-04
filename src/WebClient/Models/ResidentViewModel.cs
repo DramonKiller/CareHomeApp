@@ -1,4 +1,4 @@
-﻿namespace Dramonkiller.HappyGrandpaCareHome.WebClient.Models
+﻿namespace Dramonkiller.CareHomeApp.WebClient.Models
 {
     public class ResidentViewModel
     {

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Routing;
 
-namespace Dramonkiller.HappyGrandpaCareHome.WebServer
+namespace Dramonkiller.CareHomeApp.WebServer
 {
     public class WebApiApplication : System.Web.HttpApplication
     {

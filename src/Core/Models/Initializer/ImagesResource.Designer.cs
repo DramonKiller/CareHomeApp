@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Dramonkiller.HappyGrandpaCareHome.Core.Models.Initializer {
+namespace Dramonkiller.CareHomeApp.Core.Models.Initializer {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Dramonkiller.HappyGrandpaCareHome.Core.Models.Initializer {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dramonkiller.HappyGrandpaCareHome.Core.Models.Initializer.ImagesResource", typeof(ImagesResource).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Dramonkiller.CareHomeApp.Core.Models.Initializer.ImagesResource", typeof(ImagesResource).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -14,7 +14,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dramonkiller.HappyGrandpaCareHome.WebClient</RootNamespace>
-    <AssemblyName>Dramonkiller.HappyGrandpaCareHome.WebClient</AssemblyName>
+    <AssemblyName>Dramonkiller.CareHomeApp.WebClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />

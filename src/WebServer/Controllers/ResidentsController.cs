@@ -1,7 +1,7 @@
-﻿using Dramonkiller.HappyGrandpaCareHome.Core.Extensions;
-using Dramonkiller.HappyGrandpaCareHome.Core.Models;
-using Dramonkiller.HappyGrandpaCareHome.Core.Models.Residents;
-using Dramonkiller.HappyGrandpaCareHome.WebServerDTOs.Residents;
+﻿using Dramonkiller.CareHomeApp.Core.Extensions;
+using Dramonkiller.CareHomeApp.Core.Models;
+using Dramonkiller.CareHomeApp.Core.Models.Residents;
+using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 
-namespace Dramonkiller.HappyGrandpaCareHome.WebServer.Controllers
+namespace Dramonkiller.CareHomeApp.WebServer.Controllers
 {
     public class ResidentsController : ApiController
     {

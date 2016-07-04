@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dramonkiller.HappyGrandpaCareHome.Core</RootNamespace>
-    <AssemblyName>Dramonkiller.HappyGrandpaCareHome.Core</AssemblyName>
+    <AssemblyName>Dramonkiller.CareHomeApp.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

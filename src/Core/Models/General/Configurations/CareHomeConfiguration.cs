@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
-namespace Dramonkiller.HappyGrandpaCareHome.Core.Models.General.Configurations
+namespace Dramonkiller.CareHomeApp.Core.Models.General.Configurations
 {
     internal class CareHomeConfiguration : EntityTypeConfiguration<CareHome>
     {

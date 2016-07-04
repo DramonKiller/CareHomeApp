@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Dramonkiller.HappyGrandpaCareHome.Core.Test</RootNamespace>
-    <AssemblyName>Dramonkiller.HappyGrandpaCareHome.Core.Test</AssemblyName>
+    <AssemblyName>Dramonkiller.CareHomeApp.Core.Test</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

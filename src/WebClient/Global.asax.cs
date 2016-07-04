@@ -1,9 +1,9 @@
-﻿using Dramonkiller.HappyGrandpaCareHome.WebClient.App_Start;
+﻿using Dramonkiller.CareHomeApp.WebClient.App_Start;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Dramonkiller.HappyGrandpaCareHome.WebClient
+namespace Dramonkiller.CareHomeApp.WebClient
 {
     public class MvcApplication : System.Web.HttpApplication
     {

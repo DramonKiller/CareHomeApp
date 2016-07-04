@@ -1,10 +1,10 @@
-﻿using Dramonkiller.HappyGrandpaCareHome.WebServerDTOs.Residents;
+﻿using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Dramonkiller.HappyGrandpaCareHome.WebClient.Server
+namespace Dramonkiller.CareHomeApp.WebClient.Server
 {
     public class WebServerClient
     {

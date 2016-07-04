@@ -1,11 +1,11 @@
-﻿using Dramonkiller.HappyGrandpaCareHome.WebClient.Models;
-using Dramonkiller.HappyGrandpaCareHome.WebClient.Server;
-using Dramonkiller.HappyGrandpaCareHome.WebServerDTOs.Residents;
+﻿using Dramonkiller.CareHomeApp.WebClient.Models;
+using Dramonkiller.CareHomeApp.WebClient.Server;
+using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace Dramonkiller.HappyGrandpaCareHome.WebClient.Controllers
+namespace Dramonkiller.CareHomeApp.WebClient.Controllers
 {
     public class ResidentsController : Controller
     {

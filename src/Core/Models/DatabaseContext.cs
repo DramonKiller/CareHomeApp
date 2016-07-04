@@ -1,11 +1,11 @@
-﻿using Dramonkiller.HappyGrandpaCareHome.Core.Models.General;
-using Dramonkiller.HappyGrandpaCareHome.Core.Models.General.Configurations;
-using Dramonkiller.HappyGrandpaCareHome.Core.Models.Initializer;
-using Dramonkiller.HappyGrandpaCareHome.Core.Models.Residents;
-using Dramonkiller.HappyGrandpaCareHome.Core.Models.Residents.Configurations;
+﻿using Dramonkiller.CareHomeApp.Core.Models.General;
+using Dramonkiller.CareHomeApp.Core.Models.General.Configurations;
+using Dramonkiller.CareHomeApp.Core.Models.Initializer;
+using Dramonkiller.CareHomeApp.Core.Models.Residents;
+using Dramonkiller.CareHomeApp.Core.Models.Residents.Configurations;
 using System.Data.Entity;
 
-namespace Dramonkiller.HappyGrandpaCareHome.Core.Models
+namespace Dramonkiller.CareHomeApp.Core.Models
 {
     public class DatabaseContext : DbContext
     {

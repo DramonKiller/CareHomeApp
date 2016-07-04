@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
-namespace Dramonkiller.HappyGrandpaCareHome.WebServer
+namespace Dramonkiller.CareHomeApp.WebServer
 {
     public static class WebApiConfig
     {

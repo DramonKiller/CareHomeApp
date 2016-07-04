@@ -1,4 +1,4 @@
-﻿namespace Dramonkiller.HappyGrandpaCareHome.Core.Models.Residents
+﻿namespace Dramonkiller.CareHomeApp.Core.Models.Residents
 {
     public class ResidentPhoto
     {

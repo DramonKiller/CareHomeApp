@@ -1,4 +1,4 @@
-﻿namespace Dramonkiller.HappyGrandpaCareHome.WebServerDTOs.Residents
+﻿namespace Dramonkiller.CareHomeApp.WebServerDTOs.Residents
 {
     public class ResidentDTO
     {

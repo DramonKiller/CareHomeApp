@@ -1,6 +1,6 @@
 ﻿using System.Web.Optimization;
 
-namespace Dramonkiller.HappyGrandpaCareHome.WebClient.App_Start
+namespace Dramonkiller.CareHomeApp.WebClient.App_Start
 {
     public class BundleConfig
     {

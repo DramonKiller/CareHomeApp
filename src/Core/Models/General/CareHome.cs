@@ -1,4 +1,4 @@
-﻿namespace Dramonkiller.HappyGrandpaCareHome.Core.Models.General
+﻿namespace Dramonkiller.CareHomeApp.Core.Models.General
 {
     public class CareHome
     {

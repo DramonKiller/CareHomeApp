@@ -3,7 +3,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace Dramonkiller.HappyGrandpaCareHome.Core.Extensions
+namespace Dramonkiller.CareHomeApp.Core.Extensions
 {
     public static class ImageExtensions
     {

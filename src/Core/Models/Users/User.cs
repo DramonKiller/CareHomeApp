@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Dramonkiller.HappyGrandpaCareHome.Core.Models.Users
+namespace Dramonkiller.CareHomeApp.Core.Models.Users
 {
     class User
     {

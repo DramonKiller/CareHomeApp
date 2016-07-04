@@ -1,9 +1,9 @@
-﻿using Dramonkiller.HappyGrandpaCareHome.Core.Models;
+﻿using Dramonkiller.CareHomeApp.Core.Models;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace Dramonkiller.HappyGrandpaCareHome.Core.Test
+namespace Dramonkiller.CareHomeApp.Core.Test
 {
     class Program
     {

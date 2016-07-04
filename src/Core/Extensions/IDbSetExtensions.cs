@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace Dramonkiller.HappyGrandpaCareHome.Core.Extensions
+namespace Dramonkiller.CareHomeApp.Core.Extensions
 {
     public static class IDbSetExtensions
     { 

@@ -1,7 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Dramonkiller.HappyGrandpaCareHome.WebClient
+namespace Dramonkiller.CareHomeApp.WebClient
 {
     public class RouteConfig
     {
