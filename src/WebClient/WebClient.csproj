@@ -13,7 +13,7 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dramonkiller.HappyGrandpaCareHome.WebClient</RootNamespace>
+    <RootNamespace>Dramonkiller.CareHomeApp.WebClient</RootNamespace>
     <AssemblyName>Dramonkiller.CareHomeApp.WebClient</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
@@ -143,7 +143,6 @@
     </Compile>
     <Compile Include="Models\ResidentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\WebServerClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -166,6 +165,10 @@
     <ProjectReference Include="..\WebServerDTOs\WebServerDTOs.csproj">
       <Project>{5db79d48-1ba3-4a94-8626-e65b6fe43862}</Project>
       <Name>WebServerDTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebServerProxy\WebServerProxy.csproj">
+      <Project>{ae79b496-fd9b-4112-927f-854605da9bc0}</Project>
+      <Name>WebServerProxy</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

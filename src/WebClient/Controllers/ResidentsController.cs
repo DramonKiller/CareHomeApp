@@ -1,6 +1,7 @@
 ﻿using Dramonkiller.CareHomeApp.WebClient.Models;
-using Dramonkiller.CareHomeApp.WebClient.Server;
 using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
+using Dramonkiller.CareHomeApp.WebServerProxy;
+using Dramonkiller.CareHomeApp.WebServerProxy.Impl;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -12,7 +13,7 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
         // GET: Residents
         public async Task<ActionResult> Index()
         {
-            WebServerClient client = new WebClient.Server.WebServerClient();
+            IResidentsService client = new ResidentsService();
 
             var residentsDTO = await client.GetAllResidents();
 

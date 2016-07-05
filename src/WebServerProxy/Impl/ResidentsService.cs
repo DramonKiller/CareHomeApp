@@ -4,22 +4,21 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Dramonkiller.CareHomeApp.WebClient.Server
+namespace Dramonkiller.CareHomeApp.WebServerProxy.Impl
 {
-    public class WebServerClient
+    public class ResidentsService : IResidentsService
     {
         public string ServerUrl
         {
-            get { return "http://localhost:16434/api/"; }
+            get { return "http://localhost:16434/"; }
         }
 
         public async Task<IEnumerable<ResidentDTO>> GetAllResidents()
         {
             using (HttpClient httpClient = new HttpClient())
             {
-
                 return JsonConvert.DeserializeObject<List<ResidentDTO>>(
-                    await httpClient.GetStringAsync(ServerUrl + "/Residents" )
+                    await httpClient.GetStringAsync(ServerUrl + "api/Residents")
                 );
             }
         }
