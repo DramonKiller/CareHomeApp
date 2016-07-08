@@ -2,6 +2,7 @@
 using Dramonkiller.CareHomeApp.Core.Models;
 using Dramonkiller.CareHomeApp.Core.Models.Residents;
 using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -48,7 +49,7 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
                 return NotFound();
             }
 
-            return Ok(resident.PhotoData != null ? resident.PhotoData.Photo : null);
+            return Ok(resident.PhotoData != null ? Convert.ToBase64String(resident.PhotoData.Photo) : null);
         }
 
         // PUT: api/Residents/5

@@ -1,4 +1,5 @@
-﻿using Dramonkiller.CareHomeApp.Core.Models.General;
+﻿using Dramonkiller.CareHomeApp.Core.Extensions;
+using Dramonkiller.CareHomeApp.Core.Models.General;
 using Dramonkiller.CareHomeApp.Core.Models.Residents;
 using System.Data.Entity;
 
@@ -24,7 +25,7 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "Pepe",
                 Middle = "Pérez",
                 Surname = "Ramírez",
-                //PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0001.Resize(ImageSize, ImageSize).ToByteArray() }
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0001.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
             context.Residents.Add(resident1);
@@ -34,7 +35,7 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "María",
                 Middle = "Martinez",
                 Surname = "Sánchez",
-                //PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0003.Resize(ImageSize, ImageSize).ToByteArray() }
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0003.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
             context.Residents.Add(resident2);

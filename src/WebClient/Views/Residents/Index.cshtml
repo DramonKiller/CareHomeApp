@@ -9,8 +9,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
+<table class="table" id="table-residents">
     <tr>
+        <th>
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -26,6 +28,9 @@
     @foreach (var item in Model)
     {
         <tr>
+            <th>
+                <img class="resident-img" data-id="@item.Id" style="height: 30px; width: 30px" src="~/Content/Img/male-user_32x32.png"/>
+            </th>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -44,3 +49,25 @@
     }
 
 </table>
+
+@section Scripts {
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".resident-img").each(function () {
+            var residentId = $(this).attr("data-id");
+            var element = $(this);
+            $.getJSON('http://localhost:16434/resident/' + residentId + '/photo')
+              .done(function (data) {
+                  if (!jQuery.isEmptyObject(data)) {
+                      element.attr("src", "data:image/png;base64," + data);
+                  }
+              })
+              .fail(function (jqXHR, textStatus, err) {
+              });
+        });
+    });
+</script>
+
+
+}
