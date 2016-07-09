@@ -14,11 +14,14 @@ using System.Web.Http.Description;
 
 namespace Dramonkiller.CareHomeApp.WebServer.Controllers
 {
+    [RoutePrefix("api/residents")]
     public class ResidentsController : ApiController
     {
         private DatabaseContext db = new DatabaseContext();
 
-        // GET: api/Residents
+        #region GET
+        [HttpGet]
+        [Route("")]
         public async Task<IEnumerable<ResidentDTO>> GetResidents()
         {
             IEnumerable<Resident> residents = await db.Residents.ToArrayAsync();
@@ -26,8 +29,25 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
             return residents.Select(r => ConvertResidentToDTO(r));
         }
 
-        // GET: api/Residents/5
-        [ResponseType(typeof(Resident))]
+        [HttpGet]
+        [Route("count")]
+        public async Task<int> GetResidentCount()
+        {
+            return await db.Residents.CountAsync();
+        }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IEnumerable<ResidentDTO>> GetResidents(int pageSize, int pageIndex)
+        {
+            IEnumerable<Resident> residents = await db.Residents.OrderBy(r => r.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToArrayAsync();
+
+            return residents.Select(r => ConvertResidentToDTO(r));
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        [ResponseType(typeof(ResidentDTO))]
         public async Task<IHttpActionResult> GetResident(int id)
         {
             Resident resident = await db.Residents.FindAsync(id);
@@ -36,10 +56,12 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
                 return NotFound();
             }
 
-            return Ok(resident);
+            return Ok(ConvertResidentToDTO(resident));
         }
 
-        [Route("resident/{id}/photo")]
+        [HttpGet]
+        [Route("{id:int}/photo")]
+        [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> GetResidentPhoto(int id)
         {
             Resident resident = await db.Residents.FindAsync(id);
@@ -51,6 +73,8 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
 
             return Ok(resident.PhotoData != null ? Convert.ToBase64String(resident.PhotoData.Photo) : null);
         }
+
+        #endregion
 
         // PUT: api/Residents/5
         [ResponseType(typeof(void))]
@@ -155,9 +179,12 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
                 new ResidentDTO()
                 {
                     Id = resident.Id,
+                    Code = resident.Code, 
                     Name = resident.Name,
                     Middle = resident.Middle,
-                    Surname = resident.Surname
+                    Surname = resident.Surname,
+                    Birthdate = resident.Birthdate,
+                    Age = resident.Age  
                 }; 
         }
     }

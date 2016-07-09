@@ -1,7 +1,10 @@
-﻿using Dramonkiller.CareHomeApp.WebClient.Models;
+﻿using Dramonkiller.CareHomeApp.WebClient.Extensions;
+using Dramonkiller.CareHomeApp.WebClient.Models;
 using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
 using Dramonkiller.CareHomeApp.WebServerProxy;
 using Dramonkiller.CareHomeApp.WebServerProxy.Impl;
+using PagedList;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -11,13 +14,20 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
     public class ResidentsController : Controller
     {
         // GET: Residents
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? pageIndex)
         {
+            const int pageSize = 5;
+
             IResidentsService client = new ResidentsService();
+            IEnumerable<ResidentDTO> residents;
+            int count;
+            pageIndex = pageIndex ?? 1;
 
-            var residentsDTO = await client.GetAllResidents();
+            residents = await client.GetResidents(pageSize, pageIndex.Value);
+            count = await client.GetResidentCount();
+            
 
-            return View(residentsDTO.Select(r => ConvertResidentToViewModel(r)));
+            return View(residents.Select(r => ConvertResidentToViewModel(r)).ToPagedList(pageIndex.Value, pageSize, count));
         }
 
         private ResidentViewModel ConvertResidentToViewModel(ResidentDTO resident)

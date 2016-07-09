@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dramonkiller.CareHomeApp.WebClient.Models.ResidentViewModel>
+﻿@model IPagedList<ResidentViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -12,6 +12,9 @@
 <table class="table" id="table-residents">
     <tr>
         <th>
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Code)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
@@ -29,8 +32,11 @@
     {
         <tr>
             <th>
-                <img class="resident-img" data-id="@item.Id" style="height: 30px; width: 30px" src="~/Content/Img/male-user_32x32.png"/>
+                <img class="resident-img" data-id="@item.Id" style="height: 40px; width: 40px" src="~/Content/Img/male-user_32x32.png"/>
             </th>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -50,6 +56,10 @@
 
 </table>
 
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { pageIndex }))
+
 @section Scripts {
 
 <script type="text/javascript">
@@ -57,7 +67,7 @@
         $(".resident-img").each(function () {
             var residentId = $(this).attr("data-id");
             var element = $(this);
-            $.getJSON('http://localhost:16434/resident/' + residentId + '/photo')
+            $.getJSON('http://localhost:16434/api/residents/' + residentId + '/photo')
               .done(function (data) {
                   if (!jQuery.isEmptyObject(data)) {
                       element.attr("src", "data:image/png;base64," + data);

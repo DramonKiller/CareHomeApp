@@ -7,5 +7,9 @@ namespace Dramonkiller.CareHomeApp.WebServerProxy
     public interface IResidentsService
     {
         Task<IEnumerable<ResidentDTO>> GetAllResidents();
+
+        Task<IEnumerable<ResidentDTO>> GetResidents(int pageSize, int pageIndex);
+
+        Task<int> GetResidentCount();
     }
 }

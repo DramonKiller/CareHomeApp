@@ -22,5 +22,28 @@ namespace Dramonkiller.CareHomeApp.WebServerProxy.Impl
                 );
             }
         }
+
+        public async Task<IEnumerable<ResidentDTO>> GetResidents(int pageSize, int pageIndex)
+        {
+            var args = new { pageSize = pageSize, pageIndex = pageIndex };
+
+            using (HttpClient httpClient = new HttpClient())
+            {
+                return JsonConvert.DeserializeObject<List<ResidentDTO>>(
+                    await httpClient.GetStringAsync(ServerUrl + "api/Residents?pageIndex=" + pageIndex + "&pageSize=" + pageSize)
+                );
+            }
+        }
+
+        public async Task<int> GetResidentCount()
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                string result = await httpClient.GetStringAsync(ServerUrl + "api/Residents/Count");
+                return int.Parse(result);
+            }
+        }
+
+            
     }
 }

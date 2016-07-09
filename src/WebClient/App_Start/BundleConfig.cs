@@ -19,8 +19,13 @@ namespace Dramonkiller.CareHomeApp.WebClient.App_Start
             bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
                         "~/Scripts/toastr.min.js"));
 
+            bundles.Add(new StyleBundle("~/Content/bootstrap/css").Include(
+                      "~/Content/bootstrap.css"));
+
+            bundles.Add(new StyleBundle("~/Content/pagedList/css").Include(
+                      "~/Content/PagedList.css"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/toastr/css").Include(
