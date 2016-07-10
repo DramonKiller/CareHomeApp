@@ -14,9 +14,9 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
     public class ResidentsController : Controller
     {
         // GET: Residents
-        public async Task<ActionResult> Index(int? pageIndex)
+        public async Task<ActionResult> Index(string viewMode, int? pageIndex)
         {
-            const int pageSize = 5;
+            const int pageSize = 12;
 
             IResidentsService client = new ResidentsService();
             IEnumerable<ResidentDTO> residents;
@@ -25,7 +25,9 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
 
             residents = await client.GetResidents(pageSize, pageIndex.Value);
             count = await client.GetResidentCount();
-            
+
+            ViewBag.ViewMode = viewMode;
+            ViewBag.PageIndex = pageIndex;
 
             return View(residents.Select(r => ConvertResidentToViewModel(r)).ToPagedList(pageIndex.Value, pageSize, count));
         }
@@ -37,9 +39,11 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
                 new ResidentViewModel()
                 {
                     Id = resident.Id,
+                    Code = resident.Code, 
                     Name = resident.Name,
                     Middle = resident.Middle,
-                    Surname = resident.Surname
+                    Surname = resident.Surname,
+                    FullName = string.Format("{0} {1} {2}", resident.Name, resident.Middle, resident.Surname).Trim()
                 };
         }
     }

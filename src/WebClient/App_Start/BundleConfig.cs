@@ -14,13 +14,13 @@ namespace Dramonkiller.CareHomeApp.WebClient.App_Start
             //            "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js"));
+                      "~/Scripts/bootstrap.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/toastr").Include(
                         "~/Scripts/toastr.min.js"));
 
             bundles.Add(new StyleBundle("~/Content/bootstrap/css").Include(
-                      "~/Content/bootstrap.css"));
+                      "~/Content/bootstrap.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/pagedList/css").Include(
                       "~/Content/PagedList.css"));
@@ -30,6 +30,8 @@ namespace Dramonkiller.CareHomeApp.WebClient.App_Start
 
             bundles.Add(new StyleBundle("~/Content/toastr/css").Include(
                         "~/Content/toastr.min.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

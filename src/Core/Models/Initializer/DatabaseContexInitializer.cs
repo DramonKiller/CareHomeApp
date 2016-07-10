@@ -147,6 +147,113 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
 
             context.Residents.Add(resident12);
 
+            Resident resident13 = new Resident
+            {
+                Code = "00013",
+                Name = "Domingo",
+                Middle = "Díaz",
+                Surname = "Festivo",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0010.Resize(ImageSize, ImageSize).ToByteArray() }
+            };
+
+            context.Residents.Add(resident13);
+
+            Resident resident14 = new Resident
+            {
+                Code = "00014",
+                Name = "Eva",
+                Middle = "Fina",
+                Surname = "Segura",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0009.Resize(ImageSize, ImageSize).ToByteArray() }
+            };
+
+            context.Residents.Add(resident14);
+
+            Resident resident15 = new Resident
+            {
+                Code = "00015",
+                Name = "José Luis",
+                Middle = "Lamata",
+                Surname = "Feliz",
+            };
+
+            context.Residents.Add(resident15);
+
+            Resident resident16 = new Resident
+            {
+                Code = "00016",
+                Name = "Margarito",
+                Middle = "Flores",
+                Surname = "del Campo",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0011.Resize(ImageSize, ImageSize).ToByteArray() }
+            };
+
+            context.Residents.Add(resident16);
+
+            Resident resident17 = new Resident
+            {
+                Code = "00017",
+                Name = "Estrella",
+                Middle = "de la Osa",
+                Surname = "Mayor",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0012.Resize(ImageSize, ImageSize).ToByteArray() }
+            };
+
+            context.Residents.Add(resident17);
+
+            Resident resident18 = new Resident
+            {
+                Code = "00018",
+                Name = "Elena",
+                Middle = "Nito",
+                Surname = "del Bosque",
+            };
+
+            context.Residents.Add(resident18);
+
+            Resident resident19 = new Resident
+            {
+                Code = "00019",
+                Name = "María Concepción",
+                Middle = "Culo",
+                Surname = "Bonito",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0016.Resize(ImageSize, ImageSize).ToByteArray() }
+            };
+
+            context.Residents.Add(resident19);
+
+            Resident resident20 = new Resident
+            {
+                Code = "00020",
+                Name = "Ramona",
+                Middle = "Ponte",
+                Surname = "Alegre",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0014.Resize(ImageSize, ImageSize).ToByteArray() }
+            };
+
+            context.Residents.Add(resident20);
+
+            Resident resident21 = new Resident
+            {
+                Code = "00021",
+                Name = "Antonio",
+                Middle = "Suelta",
+                Surname = "Melo",
+                PhotoData = new ResidentPhoto { Photo = ImagesResource.RES0015.Resize(ImageSize, ImageSize).ToByteArray() }
+            };
+
+            context.Residents.Add(resident21);
+
+            Resident resident22 = new Resident
+            {
+                Code = "00022",
+                Name = "Pedro",
+                Middle = "Trabajo",
+                Surname = "Cumplido",
+            };
+
+            context.Residents.Add(resident22);
+
             context.SaveChanges();
         }
     }
