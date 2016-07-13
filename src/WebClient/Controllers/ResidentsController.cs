@@ -16,7 +16,7 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
         // GET: Residents
         public async Task<ActionResult> Index(string viewMode, int? pageIndex)
         {
-            const int pageSize = 12;
+            const int pageSize = 18;
 
             IResidentsService client = new ResidentsService();
             IEnumerable<ResidentDTO> residents;
