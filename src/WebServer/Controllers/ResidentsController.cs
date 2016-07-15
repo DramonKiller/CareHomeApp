@@ -1,6 +1,6 @@
-﻿using Dramonkiller.CareHomeApp.Core.Extensions;
-using Dramonkiller.CareHomeApp.Core.Models;
-using Dramonkiller.CareHomeApp.Core.Models.Residents;
+﻿using Dramonkiller.CareHomeApp.DataAccess.Repositories;
+using Dramonkiller.CareHomeApp.Domain.Entities.Residents;
+using Dramonkiller.CareHomeApp.Domain.Infrastructure;
 using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
 using System;
 using System.Collections.Generic;
@@ -17,14 +17,19 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
     [RoutePrefix("api/residents")]
     public class ResidentsController : ApiController
     {
-        private DatabaseContext db = new DatabaseContext();
+        private IUnitOfWork unitOfWork;
+
+        public ResidentsController(IUnitOfWork unitOfWork)
+        {
+            this.unitOfWork = unitOfWork;
+        }
 
         #region GET
         [HttpGet]
         [Route("")]
         public async Task<IEnumerable<ResidentDTO>> GetResidents()
         {
-            IEnumerable<Resident> residents = await db.Residents.ToArrayAsync();
+            IEnumerable<Resident> residents = await unitOfWork.Residents.GetAll().ToArrayAsync();
              
             return residents.Select(r => ConvertResidentToDTO(r));
         }
@@ -33,14 +38,14 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
         [Route("count")]
         public async Task<int> GetResidentCount()
         {
-            return await db.Residents.CountAsync();
+            return await unitOfWork.Residents.CountAsync();
         }
 
         [HttpGet]
         [Route("")]
         public async Task<IEnumerable<ResidentDTO>> GetResidents(int pageSize, int pageIndex)
         {
-            IEnumerable<Resident> residents = await db.Residents.OrderBy(r => r.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToArrayAsync();
+            IEnumerable<Resident> residents = await unitOfWork.Residents.GetAll().OrderBy(r => r.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToArrayAsync();
 
             return residents.Select(r => ConvertResidentToDTO(r));
         }
@@ -50,7 +55,7 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
         [ResponseType(typeof(ResidentDTO))]
         public async Task<IHttpActionResult> GetResident(int id)
         {
-            Resident resident = await db.Residents.FindAsync(id);
+            Resident resident = await unitOfWork.Residents.FindAsync(id);
             if (resident == null)
             {
                 return NotFound();
@@ -64,7 +69,7 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> GetResidentPhoto(int id)
         {
-            Resident resident = await db.Residents.FindAsync(id);
+            Resident resident = await unitOfWork.Residents.FindAsync(id);
 
             if (resident == null)
             {
@@ -90,13 +95,13 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
                 return BadRequest();
             }
 
-            db.Entry(resident).State = EntityState.Modified;
+            unitOfWork.Residents.Update(resident); 
 
             try
             {
-                await db.SaveChangesAsync();
+                await unitOfWork.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
+            catch (UpdateConcurrencyException)
             {
                 if (!ResidentExists(id))
                 {
@@ -120,11 +125,11 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Residents.Add(resident);
+            unitOfWork.Residents.Add(resident);
 
             try
             {
-                await db.SaveChangesAsync();
+                await unitOfWork.SaveChangesAsync();
             }
             catch (DbUpdateException)
             {
@@ -145,15 +150,16 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
         [ResponseType(typeof(Resident))]
         public async Task<IHttpActionResult> DeleteResident(int id)
         {
-            Resident resident = await db.Residents.FindAsync(id);
+            Resident resident = await unitOfWork.Residents.FindAsync(id);
+
             if (resident == null)
             {
                 return NotFound();
             }
 
-            db.Residents.Remove(resident);
-            await db.SaveChangesAsync();
-
+            unitOfWork.Residents.Remove(resident);
+            await unitOfWork.SaveChangesAsync();
+            
             return Ok(resident);
         }
 
@@ -161,7 +167,7 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                unitOfWork.Dispose();
             }
 
             base.Dispose(disposing);
@@ -169,7 +175,7 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
 
         private bool ResidentExists(int id)
         {
-            return db.Residents.Count(e => e.Id == id) > 0;
+            return unitOfWork.Residents.GetAll().Count(e => e.Id == id) > 0;
         }
 
         private ResidentDTO ConvertResidentToDTO(Resident resident)
