@@ -2,6 +2,7 @@
 using Dramonkiller.CareHomeApp.Domain.Entities.Residents;
 using Dramonkiller.CareHomeApp.Domain.Infrastructure;
 using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
+using LinqKit;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -25,7 +26,7 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
         }
 
         #region GET
-        [HttpGet]
+        
         [Route("")]
         public async Task<IEnumerable<ResidentDTO>> GetResidents()
         {
@@ -34,23 +35,24 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
             return residents.Select(r => ConvertResidentToDTO(r));
         }
 
-        [HttpGet]
         [Route("count")]
-        public async Task<int> GetResidentCount()
+        public async Task<int> GetResidentCount([FromUri]GetResidentsFiltersDTO filters = null)
         {
-            return await unitOfWork.Residents.CountAsync();
+            var query = GetResidentQuery(filters);
+
+            return await query.CountAsync();
         }
 
-        [HttpGet]
         [Route("")]
-        public async Task<IEnumerable<ResidentDTO>> GetResidents(int pageSize, int pageIndex)
+        public async Task<IEnumerable<ResidentDTO>> GetResidents(int pageSize, int pageIndex, [FromUri]GetResidentsFiltersDTO filters = null)
         {
-            IEnumerable<Resident> residents = await unitOfWork.Residents.GetAll().OrderBy(r => r.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToArrayAsync();
+            var query = GetResidentQuery(filters);
+
+            IEnumerable<Resident> residents = await query.OrderBy(r => r.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToArrayAsync();
 
             return residents.Select(r => ConvertResidentToDTO(r));
         }
 
-        [HttpGet]
         [Route("{id:int}")]
         [ResponseType(typeof(ResidentDTO))]
         public async Task<IHttpActionResult> GetResident(int id)
@@ -64,7 +66,6 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
             return Ok(ConvertResidentToDTO(resident));
         }
 
-        [HttpGet]
         [Route("{id:int}/photo")]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> GetResidentPhoto(int id)
@@ -171,6 +172,26 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        private IQueryable<Resident> GetResidentQuery(GetResidentsFiltersDTO filters)
+        {
+            var filterExpression = PredicateBuilder.True<Resident>();
+
+            if (filters != null)
+            {
+                if (!string.IsNullOrEmpty(filters.Code))
+                {
+                    filterExpression = filterExpression.And(r => r.Code.Contains(filters.Code));
+                }
+
+                if (!string.IsNullOrEmpty(filters.Name))
+                {
+                    filterExpression = filterExpression.And(r => r.Name.Contains(filters.Name));
+                }
+            }
+
+            return unitOfWork.Residents.GetAll().Where(filterExpression).AsExpandable();
         }
 
         private bool ResidentExists(int id)

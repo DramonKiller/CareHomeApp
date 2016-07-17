@@ -6,7 +6,40 @@
     const int columnsCardView = 6;
 }
 
-<h2>Index</h2>
+<h2>@Resources.Residents</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1">@Resources.Filters: <span class="bold">@ViewBag.FilterString</span></a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.Code)</label>
+                            <div class="col-md-10">
+                                @Html.TextBox("FilterCode", (object)ViewBag.FilterCode, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.Name)</label>
+                            <div class="col-md-10">
+                                @Html.TextBox("FilterName", (object)ViewBag.FilterName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn btn-default" value="@Resources.FilterAction" />
+                 </div>
+            </div>
+        </div>
+    </div>
+}
 
 <div class="dropdown inline">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
@@ -23,11 +56,11 @@
     <ul class="dropdown-menu">
         @if (cardView)
         {
-            <li><a href="@Url.Action("Index", new { viewMode = "list", pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">@Resources.ListView</a></li>
+            <li><a href="@Url.Action("Index", new { viewMode = "list", filterCode = ViewBag.FilterCode, filterName = ViewBag.FilterName, pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">@Resources.ListView</a></li>
         }
         else
         {
-            <li><a href="@Url.Action("Index", new { viewMode = "card", pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">@Resources.CardView</a></li>
+            <li><a href="@Url.Action("Index", new { viewMode = "card", filterCode = ViewBag.FilterCode, filterName = ViewBag.FilterName, pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">@Resources.CardView</a></li>
         }
     </ul>
 </div>
@@ -74,7 +107,7 @@
 
     if (closeRow)
     {
-        @:</div >
+        @Html.Raw("</div >");
     }
 }
 else
@@ -130,7 +163,7 @@ else
 
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-@Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { viewMode = ViewBag.ViewMode, pageIndex = pageIndex }))
+@Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { viewMode = ViewBag.ViewMode, filterCode = ViewBag.FilterCode, filterName = ViewBag.FilterName, pageIndex = pageIndex }))
 
 @section Scripts {
 

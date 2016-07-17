@@ -129,6 +129,15 @@
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="FilterAction" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
   <data name="FullName" xml:space="preserve">
     <value>Full name</value>
   </data>
@@ -140,6 +149,9 @@
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="Residents" xml:space="preserve">
+    <value>Residents</value>
   </data>
   <data name="Surname" xml:space="preserve">
     <value>Surname</value>
