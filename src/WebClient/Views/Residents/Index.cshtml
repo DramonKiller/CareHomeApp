@@ -8,32 +8,31 @@
 
 <h2>Index</h2>
 
-
-<a href="@Url.Action("Create")" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Create New</a>
-
 <div class="dropdown inline">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
         @if (cardView)
         {
-            @:Card view
+            @Resources.CardView;
         }
         else
         {
-            @:List view
+            @Resources.ListView;
         }
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
         @if (cardView)
         {
-            <li><a href="@Url.Action("Index", new { viewMode = "list", pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">List view</a></li>
+            <li><a href="@Url.Action("Index", new { viewMode = "list", pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">@Resources.ListView</a></li>
         }
         else
         {
-            <li><a href="@Url.Action("Index", new { viewMode = "card", pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">Card view</a></li>
+            <li><a href="@Url.Action("Index", new { viewMode = "card", pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">@Resources.CardView</a></li>
         }
     </ul>
 </div>
+
+<a href="@Url.Action("Create")" class="btn btn-default pull-right"><span class="glyphicon glyphicon-plus"></span> Create New</a>
 
 <div class="help-block"></div>
 
@@ -50,18 +49,20 @@
             closeRow = true;
         }
         <div class="col-md-2">
-            <div class="card">
-                <div class="card-header card-header-resident-height">
+            <div class="panel panel-default">
+                <div class="panel-heading card-header-resident-height">
                     @item.FullName
                 </div>
-                <img class="card-img-top resident-img" data-id="@item.Id" src="~/Content/Img/male-user-small_128x128.png" style="height: 180px; width: 100%; display: block;">
-                <div class="card-block">
-                    @*<h4 class="card-title">Special title treatment</h4>*@
+                <div class="panel-body">
+                    <img class="resident-img img-responsive center-block" data-id="@item.Id" src="~/Content/Img/male-user-small_128x128.png" style="height: 150px; display: block;">
+                    <div class="help-block"></div>
                     <p class="card-text">@Html.DisplayNameFor(model => model.Code): @item.Code</p>
+                </div>
+                <div class="panel-footer" style="background: white;">
                     <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
                     <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span>Delete</a>
                 </div>
-            </div>
+             </div>
         </div>
         if (count % columnsCardView == (columnsCardView - 1))
         {

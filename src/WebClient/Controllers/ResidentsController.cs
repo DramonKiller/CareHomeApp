@@ -34,8 +34,12 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
 
         private ResidentViewModel ConvertResidentToViewModel(ResidentDTO resident)
         {
-            return resident == null ?
-                null :
+            if (resident == null)
+            {
+                return null;
+            }
+
+            ResidentViewModel residentViewModel = 
                 new ResidentViewModel()
                 {
                     Id = resident.Id,
@@ -43,8 +47,11 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
                     Name = resident.Name,
                     Middle = resident.Middle,
                     Surname = resident.Surname,
-                    FullName = string.Format("{0} {1} {2}", resident.Name, resident.Middle, resident.Surname).Trim()
                 };
+
+            residentViewModel.RefreshFullName();
+
+            return residentViewModel;
         }
     }
 }
