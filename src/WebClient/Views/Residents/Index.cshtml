@@ -1,8 +1,7 @@
-﻿@model IPagedList<ResidentViewModel>
+﻿@model ResidentIndexViewModel
 
 @{
     ViewBag.Title = "Index";
-    bool cardView = ViewBag.ViewMode == "card";
     const int columnsCardView = 6;
 }
 
@@ -14,27 +13,33 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h4 class="panel-title">
-                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1">@Resources.Filters: <span class="bold">@ViewBag.FilterString</span></a>
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse1">@Resources.CurrentFilters: <span class="bold">@Model.FilterString</span></a>
                 </h4>
             </div>
             <div id="collapse1" class="panel-collapse collapse">
                 <div class="panel-body">
                     <div class="form-horizontal">
                         <div class="form-group">
-                            <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.Code)</label>
-                            <div class="col-md-10">
-                                @Html.TextBox("FilterCode", (object)ViewBag.FilterCode, new { @class = "form-control" })
+                            <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.DummyResident.Code)</label>
+                            <div class="col-md-2">
+                                @Html.TextBox("FilterCode", Model.FilterCode, new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.Name)</label>
-                            <div class="col-md-10">
-                                @Html.TextBox("FilterName", (object)ViewBag.FilterName, new { @class = "form-control" })
+                            <label class="control-label col-md-2">@Html.DisplayNameFor(model => model.DummyResident.FullName)</label>
+                            <div class="col-md-3">
+                                @Html.TextBox("FilterName", Model.FilterName, new { @class = "form-control" })
                             </div>
                         </div>
                     </div>
-
-                    <input type="submit" class="btn btn-default" value="@Resources.FilterAction" />
+                    <div class="left-inner-addon-inline">
+                        <i class="glyphicon glyphicon-filter"></i>
+                        <input type="submit" class="btn btn-default" value="@Resources.FilterAction" />
+                    </div>
+                    <div class="left-inner-addon-inline">
+                        <i class="glyphicon glyphicon-remove"></i>
+                        <input type="button" class="btn btn-default" value="@Resources.Cancel" onclick="location.href='@Url.Action("Index", new { viewMode = Model.ViewMode, pageIndex = Model.PageIndex })';"/>
+                    </div>
                  </div>
             </div>
         </div>
@@ -43,25 +48,11 @@
 
 <div class="dropdown inline">
     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-        @if (cardView)
-        {
-            @Resources.CardView;
-        }
-        else
-        {
-            @Resources.ListView;
-        }
+        <span class="@Model.Icon"></span> @Model.ViewModeCaption 
         <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-        @if (cardView)
-        {
-            <li><a href="@Url.Action("Index", new { viewMode = "list", filterCode = ViewBag.FilterCode, filterName = ViewBag.FilterName, pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">@Resources.ListView</a></li>
-        }
-        else
-        {
-            <li><a href="@Url.Action("Index", new { viewMode = "card", filterCode = ViewBag.FilterCode, filterName = ViewBag.FilterName, pageIndex = ViewBag.PageIndex })" class="btn btn-default btn-sm">@Resources.CardView</a></li>
-        }
+        <li><a href="@Url.Action("Index", new { viewMode = Model.TheOtherView, filterCode = Model.FilterCode, filterName = Model.FilterName, pageIndex = Model.PageIndex })" class="btn btn-default btn-sm"><span class="@Model.TheOtherViewIcon"></span> @Model.TheOtherViewCaption</a></li>
     </ul>
 </div>
 
@@ -69,12 +60,12 @@
 
 <div class="help-block"></div>
 
-@if (cardView)
+@if (Model.IsCardMode)
 {
     int count = 0;
     bool closeRow = false;
     
-    foreach (var item in Model)
+    foreach (var item in Model.Residents)
     {
         if (count % columnsCardView == 0)
         {
@@ -89,7 +80,7 @@
                 <div class="panel-body">
                     <img class="resident-img img-responsive center-block" data-id="@item.Id" src="~/Content/Img/male-user-small_128x128.png" style="height: 150px; display: block;">
                     <div class="help-block"></div>
-                    <p class="card-text">@Html.DisplayNameFor(model => model.Code): @item.Code</p>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.DummyResident.Code): @item.Code</p>
                 </div>
                 <div class="panel-footer" style="background: white;">
                     <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
@@ -118,21 +109,21 @@ else
                 <th>
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Code)
+                    @Html.DisplayNameFor(model => model.DummyResident.Code)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.DisplayNameFor(model => model.DummyResident.Name)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Middle)
+                    @Html.DisplayNameFor(model => model.DummyResident.Middle)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Surname)
+                    @Html.DisplayNameFor(model => model.DummyResident.Surname)
                 </th>
                 <th></th>
             </tr>
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.Residents)
             {
                 <tr>
                     <th>
@@ -161,9 +152,9 @@ else
     </div>
 }
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Resources.Page @(Model.Residents.PageCount < Model.Residents.PageNumber ? 0 : Model.Residents.PageNumber) @Resources.of @Model.Residents.PageCount
 
-@Html.PagedListPager(Model, pageIndex => Url.Action("Index", new { viewMode = ViewBag.ViewMode, filterCode = ViewBag.FilterCode, filterName = ViewBag.FilterName, pageIndex = pageIndex }))
+@Html.PagedListPager(Model.Residents, pageIndex => Url.Action("Index", new { viewMode = Model.ViewMode, filterCode = Model.FilterCode, filterName = Model.FilterName, pageIndex = pageIndex }))
 
 @section Scripts {
 

@@ -1,9 +1,11 @@
-﻿using Dramonkiller.CareHomeApp.WebClient.Extensions;
-using Dramonkiller.CareHomeApp.WebClient.Models;
+﻿using Dramonkiller.CareHomeApp.Utilities.Extensions;
+using Dramonkiller.CareHomeApp.WebClient.Extensions;
+using Dramonkiller.CareHomeApp.WebClient.ViewModels;
+using Dramonkiller.CareHomeApp.WebClient.ViewModels.Residents;
 using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
 using Dramonkiller.CareHomeApp.WebServerProxy;
-using Dramonkiller.CareHomeApp.WebServerProxy.Impl;
 using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -26,7 +28,6 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
         {
             const int pageSize = 18;
 
-            IResidentsService client = new ResidentsService();
             IEnumerable<ResidentDTO> residents;
             int count;
             pageIndex = pageIndex ?? 1;
@@ -36,29 +37,41 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
                 Name = filterName
             };
 
-            residents = await client.GetResidentsAsync(pageSize, pageIndex.Value, filtersDTO);
-            count = await client.GetResidentCountAsync(filtersDTO);
+            count = await residentService.GetResidentCountAsync(filtersDTO);
+
+            if (Math.Floor((decimal)(count / pageSize)) < pageIndex - 1)
+            {
+                pageIndex = 1;
+            }
+
+            residents = await residentService.GetResidentsAsync(pageSize, pageIndex.Value, filtersDTO);
+            
 
             List<string> filters = new List<string>();
 
-            // TODO: Get the attribute display for the properties
             if (!string.IsNullOrEmpty(filterCode))
             {
-                filters.Add(string.Format("Code: '{0}'", filterCode)); 
+                string labelText = AttributeExtensions.GetDisplayName<ResidentViewModel>(MemberExtensions.GetPropertyName<ResidentViewModel>(r => r.Code));
+                filters.Add(string.Format("{0}: '{1}'", labelText, filterCode)); 
             }
 
             if (!string.IsNullOrEmpty(filterName))
             {
+                string labelText = AttributeExtensions.GetDisplayName<ResidentViewModel>(MemberExtensions.GetPropertyName<ResidentViewModel>(r => r.FullName));
                 filters.Add(string.Format("Name: '{0}'", filterName));
             }
 
-            ViewBag.ViewMode = viewMode;
-            ViewBag.FilterName = filterName;
-            ViewBag.FilterCode = filterCode;
-            ViewBag.PageIndex = pageIndex;
-            ViewBag.FilterString = string.Join("; ", filters); 
+            ResidentIndexViewModel viewModel = new ResidentIndexViewModel
+            {
+                ViewMode = viewMode,
+                FilterName = filterName,
+                FilterCode = filterCode,
+                PageIndex = pageIndex.Value,
+                FilterString = string.Join("; ", filters),
+                Residents = residents.Select(r => ConvertResidentToViewModel(r)).ToPagedList(pageIndex.Value, pageSize, count) as IPagedList<ResidentViewModel>
+            };
 
-            return View(residents.Select(r => ConvertResidentToViewModel(r)).ToPagedList(pageIndex.Value, pageSize, count));
+            return View(viewModel);
         }
 
         public async Task<ActionResult> Edit(int? id)
@@ -93,9 +106,8 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
                     Name = resident.Name,
                     Middle = resident.Middle,
                     Surname = resident.Surname,
+                    FullName = resident.FullName 
                 };
-
-            residentViewModel.RefreshFullName();
 
             return residentViewModel;
         }

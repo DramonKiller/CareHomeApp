@@ -150,10 +150,25 @@
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="of" xml:space="preserve">
+    <value>of</value>
+  </data>
+  <data name="Page" xml:space="preserve">
+    <value>Page</value>
+  </data>
   <data name="Residents" xml:space="preserve">
     <value>Residents</value>
   </data>
   <data name="Surname" xml:space="preserve">
     <value>Surname</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CancelFilter" xml:space="preserve">
+    <value>Cancel filter</value>
+  </data>
+  <data name="CurrentFilters" xml:space="preserve">
+    <value>Current filters</value>
   </data>
 </root>

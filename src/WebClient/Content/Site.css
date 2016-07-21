@@ -40,6 +40,47 @@
 }
 
 
+/* Icons inside of inputs. Examples: http://jsfiddle.net/rbsthlm/qE9kJ/ */
+.left-inner-addon {
+    position: relative;
+}
+.left-inner-addon input {
+    padding-left: 30px;    
+}
+.left-inner-addon i {
+    position: absolute;
+    padding: 9px 10px;
+    pointer-events: none;
+}
+
+.left-inner-addon-inline {
+    position: relative;
+display: inline;
+}
+.left-inner-addon-inline input {
+    padding-left: 30px;    
+}
+.left-inner-addon-inline i {
+    position: absolute;
+    padding: 1px 10px;
+    pointer-events: none;
+}
+
+.right-inner-addon {
+    position: relative;
+}
+.right-inner-addon input {
+    padding-right: 30px;    
+}
+.right-inner-addon i {
+    position: absolute;
+    right: 0px;
+    padding: 10px 12px;
+    pointer-events: none;
+}
+
+/* Fin */
+
 .inline {
     display: inline;
 }

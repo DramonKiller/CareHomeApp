@@ -17,6 +17,7 @@ namespace Dramonkiller.CareHomeApp.DataAccess.Configurations.Residents
             this.Property(x => x.Name).HasColumnName("Name").IsRequired().HasMaxLength(50);
             this.Property(x => x.Middle).HasColumnName("Middle").IsOptional().HasMaxLength(50);
             this.Property(x => x.Surname).HasColumnName("Surname").IsOptional().HasMaxLength(50);
+            this.Property(x => x.FullName).HasColumnName("FullName").IsOptional().HasMaxLength(160);
             this.Property(x => x.Birthdate).HasColumnName("Birthdate").IsOptional();
             this.Property(x => x.Age).HasColumnName("Age").IsOptional();
 

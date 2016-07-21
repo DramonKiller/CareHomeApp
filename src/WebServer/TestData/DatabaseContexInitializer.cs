@@ -4,6 +4,7 @@ using Dramonkiller.CareHomeApp.Domain.Models.General;
 using Dramonkiller.CareHomeApp.Extensions;
 using Dramonkiller.CareHomeApp.WebServer.TestData;
 using System.Data.Entity;
+using System.Linq;
 
 namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
 {
@@ -265,6 +266,8 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
             };
 
             context.Residents.Add(resident23);
+
+            context.Residents.Local.ToList().ForEach(r => r.UpdateFullName()); 
 
             context.SaveChanges();
         }

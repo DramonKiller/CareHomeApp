@@ -2,7 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Dramonkiller.CareHomeApp.WebClient.Models
+namespace Dramonkiller.CareHomeApp.WebClient.ViewModels
 {
     public class ResidentViewModel
     {
@@ -28,10 +28,5 @@ namespace Dramonkiller.CareHomeApp.WebClient.Models
 
         [Display(Name = nameof(Age), ResourceType = typeof(Resources))]
         public int? Age { get; set; }
-
-        public void RefreshFullName()
-        {
-            FullName = string.Format("{0} {1} {2}", Name, Middle, Surname).Trim();
-        }
     }
 }

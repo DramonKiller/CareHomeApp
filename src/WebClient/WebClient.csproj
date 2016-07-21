@@ -180,13 +180,15 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Controllers\ResidentsController.cs" />
+    <Compile Include="Extensions\AttributeExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\MvcExtensions.cs" />
     <Compile Include="Extensions\MyPagedList.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\ResidentViewModel.cs" />
+    <Compile Include="ViewModels\Residents\ResidentIndexViewModel.cs" />
+    <Compile Include="ViewModels\ResidentViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.es.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -222,6 +224,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Utilities\Utilities.csproj">
+      <Project>{f688299f-f69f-4f78-84f5-f61cbe1a07a0}</Project>
+      <Name>Utilities</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebServerDTOs\WebServerDTOs.csproj">
       <Project>{5db79d48-1ba3-4a94-8626-e65b6fe43862}</Project>
       <Name>WebServerDTOs</Name>

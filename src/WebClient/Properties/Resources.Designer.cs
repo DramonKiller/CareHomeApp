@@ -79,6 +79,24 @@ namespace Dramonkiller.CareHomeApp.WebClient.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel filter.
+        /// </summary>
+        public static string CancelFilter {
+            get {
+                return ResourceManager.GetString("CancelFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Card view.
         /// </summary>
         public static string CardView {
@@ -93,6 +111,15 @@ namespace Dramonkiller.CareHomeApp.WebClient.Properties {
         public static string Code {
             get {
                 return ResourceManager.GetString("Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current filters.
+        /// </summary>
+        public static string CurrentFilters {
+            get {
+                return ResourceManager.GetString("CurrentFilters", resourceCulture);
             }
         }
         
@@ -156,6 +183,24 @@ namespace Dramonkiller.CareHomeApp.WebClient.Properties {
         public static string Name {
             get {
                 return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of.
+        /// </summary>
+        public static string of {
+            get {
+                return ResourceManager.GetString("of", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Page.
+        /// </summary>
+        public static string Page {
+            get {
+                return ResourceManager.GetString("Page", resourceCulture);
             }
         }
         

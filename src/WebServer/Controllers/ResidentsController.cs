@@ -187,7 +187,7 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
 
                 if (!string.IsNullOrEmpty(filters.Name))
                 {
-                    filterExpression = filterExpression.And(r => r.Name.Contains(filters.Name));
+                    filterExpression = filterExpression.And(r => r.FullName.Contains(filters.Name));
                 }
             }
 
@@ -210,6 +210,7 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
                     Name = resident.Name,
                     Middle = resident.Middle,
                     Surname = resident.Surname,
+                    FullName = resident.FullName, 
                     Birthdate = resident.Birthdate,
                     Age = resident.Age  
                 }; 
