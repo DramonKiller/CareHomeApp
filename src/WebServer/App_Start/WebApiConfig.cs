@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace Dramonkiller.CareHomeApp.WebServer
+namespace Dramonkiller.CareHomeApp.WebServer.App_Start
 {
     public static class WebApiConfig
     {

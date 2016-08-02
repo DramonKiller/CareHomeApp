@@ -38,7 +38,7 @@
                     </div>
                     <div class="left-inner-addon-inline">
                         <i class="glyphicon glyphicon-remove"></i>
-                        <input type="button" class="btn btn-default" value="@Resources.Cancel" onclick="location.href='@Url.Action("Index", new { viewMode = Model.ViewMode, pageIndex = Model.PageIndex })';"/>
+                        <input type="button" class="btn btn-default" value="@Resources.Cancel" onclick="location.href='@Url.Action(ResidentsController.IndexAction, new { viewMode = Model.ViewMode, pageIndex = Model.PageIndex })';"/>
                     </div>
                  </div>
             </div>
@@ -78,13 +78,18 @@
                     @item.FullName
                 </div>
                 <div class="panel-body">
+                    @if (@item.HasNotifications)
+                    {
+                        <button data-toggle="popover" title="@Resources.Notifications" data-trigger="focus" data-content="@item.Notifications" class="btn btn-warning position-absolute"><span class="glyphicon glyphicon-alert"></span></button>
+                    }
                     <img class="resident-img img-responsive center-block" data-id="@item.Id" src="~/Content/Img/male-user-small_128x128.png" style="height: 150px; display: block;">
                     <div class="help-block"></div>
                     <p class="card-text">@Html.DisplayNameFor(model => model.DummyResident.Code): @item.Code</p>
+                    <p class="card-text">@Html.DisplayNameFor(model => model.DummyResident.DocumentId): @item.DocumentId</p>
                 </div>
                 <div class="panel-footer" style="background: white;">
-                    <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
-                    <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span>Delete</a>
+                    <a href="@Url.Action(ResidentsController.EditAction, new { id = item.Id })" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
+                    <a href="@Url.Action(ResidentsController.DeleteAction, new { id = item.Id })" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span>Delete</a>
                 </div>
              </div>
         </div>
@@ -127,6 +132,10 @@ else
             {
                 <tr>
                     <th>
+                        @if (@item.HasNotifications)
+                        {
+                            <button data-toggle="popover" title="@Resources.Notifications" data-trigger="focus" data-content="@item.Notifications" class="btn btn-warning"><span class="glyphicon glyphicon-alert"></span></button>
+                        }
                         <img class="resident-img" data-id="@item.Id" style="height: 40px; width: 40px" src="~/Content/Img/male-user_32x32.png" />
                     </th>
                     <td>
@@ -160,6 +169,8 @@ else
 
     <script type="text/javascript">
         $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+            
             $(".resident-img").each(function () {
                 var residentId = $(this).attr("data-id");
                 var element = $(this);

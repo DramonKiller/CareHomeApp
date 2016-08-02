@@ -1,4 +1,5 @@
-﻿using Dramonkiller.CareHomeApp.DataAccess.Repositories;
+﻿using AutoMapper;
+using Dramonkiller.CareHomeApp.DataAccess.Repositories;
 using Dramonkiller.CareHomeApp.Domain.Entities.Residents;
 using Dramonkiller.CareHomeApp.Domain.Infrastructure;
 using Dramonkiller.CareHomeApp.WebServerDTOs.Residents;
@@ -20,22 +21,36 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
     {
         private IUnitOfWork unitOfWork;
 
-        public ResidentsController(IUnitOfWork unitOfWork)
+        private IMapper mapper;
+
+        public ResidentsController(IUnitOfWork unitOfWork, IMapper mapper)
         {
             this.unitOfWork = unitOfWork;
+            this.mapper = mapper;
         }
 
         #region GET
         
         [Route("")]
+        [HttpGet]
         public async Task<IEnumerable<ResidentDTO>> GetResidents()
         {
             IEnumerable<Resident> residents = await unitOfWork.Residents.GetAll().ToArrayAsync();
              
-            return residents.Select(r => ConvertResidentToDTO(r));
+            return residents.Select(r => mapper.Map<ResidentDTO>(r));
+        }
+
+        [Route("lite")]
+        [HttpGet]
+        public async Task<IEnumerable<ResidentLiteDTO>> GetResidentsLite()
+        {
+            IEnumerable<Resident> residents = await unitOfWork.Residents.GetAll().ToArrayAsync();
+
+            return residents.Select(r => mapper.Map<ResidentLiteDTO>(r));
         }
 
         [Route("count")]
+        [HttpGet]
         public async Task<int> GetResidentCount([FromUri]GetResidentsFiltersDTO filters = null)
         {
             var query = GetResidentQuery(filters);
@@ -44,16 +59,29 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
         }
 
         [Route("")]
+        [HttpGet]
         public async Task<IEnumerable<ResidentDTO>> GetResidents(int pageSize, int pageIndex, [FromUri]GetResidentsFiltersDTO filters = null)
         {
             var query = GetResidentQuery(filters);
 
             IEnumerable<Resident> residents = await query.OrderBy(r => r.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToArrayAsync();
 
-            return residents.Select(r => ConvertResidentToDTO(r));
+            return residents.Select(r => mapper.Map<ResidentDTO>(r));
+        }
+
+        [Route("lite")]
+        [HttpGet]
+        public async Task<IEnumerable<ResidentLiteDTO>> GetResidentsLite(int pageSize, int pageIndex, [FromUri]GetResidentsFiltersDTO filters = null)
+        {
+            var query = GetResidentQuery(filters);
+
+            IEnumerable<Resident> residents = await query.OrderBy(r => r.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToArrayAsync();
+
+            return residents.Select(r => mapper.Map<ResidentLiteDTO>(r));
         }
 
         [Route("{id:int}")]
+        [HttpGet]
         [ResponseType(typeof(ResidentDTO))]
         public async Task<IHttpActionResult> GetResident(int id)
         {
@@ -63,10 +91,11 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
                 return NotFound();
             }
 
-            return Ok(ConvertResidentToDTO(resident));
+            return Ok(mapper.Map<ResidentDTO>(resident));
         }
 
         [Route("{id:int}/photo")]
+        [HttpGet]
         [ResponseType(typeof(string))]
         public async Task<IHttpActionResult> GetResidentPhoto(int id)
         {
@@ -197,23 +226,6 @@ namespace Dramonkiller.CareHomeApp.WebServer.Controllers
         private bool ResidentExists(int id)
         {
             return unitOfWork.Residents.GetAll().Count(e => e.Id == id) > 0;
-        }
-
-        private ResidentDTO ConvertResidentToDTO(Resident resident)
-        {
-            return resident == null ?
-                null :
-                new ResidentDTO()
-                {
-                    Id = resident.Id,
-                    Code = resident.Code, 
-                    Name = resident.Name,
-                    Middle = resident.Middle,
-                    Surname = resident.Surname,
-                    FullName = resident.FullName, 
-                    Birthdate = resident.Birthdate,
-                    Age = resident.Age  
-                }; 
         }
     }
 }

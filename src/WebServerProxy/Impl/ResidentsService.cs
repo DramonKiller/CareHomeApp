@@ -18,7 +18,17 @@ namespace Dramonkiller.CareHomeApp.WebServerProxy.Impl
             using (HttpClient httpClient = new HttpClient())
             {
                 return JsonConvert.DeserializeObject<List<ResidentDTO>>(
-                    await httpClient.GetStringAsync(ServerUrl + "api/Residents")
+                    await httpClient.GetStringAsync(ServerUrl + "api/residents")
+                );
+            }
+        }
+
+        public async Task<IEnumerable<ResidentLiteDTO>> GetAllResidentsLiteAsync()
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                return JsonConvert.DeserializeObject<List<ResidentLiteDTO>>(
+                    await httpClient.GetStringAsync(ServerUrl + "api/residents/lite")
                 );
             }
         }
@@ -30,15 +40,31 @@ namespace Dramonkiller.CareHomeApp.WebServerProxy.Impl
 
         public async Task<IEnumerable<ResidentDTO>> GetResidentsAsync(int pageSize, int pageIndex, GetResidentsFiltersDTO filter)
         {
+            return JsonConvert.DeserializeObject<List<ResidentDTO>>(
+                await GetCallResidentsAsync(pageSize, pageIndex, filter, false));
+        }
+
+        public async Task<IEnumerable<ResidentLiteDTO>> GetResidentsLiteAsync(int pageSize, int pageIndex)
+        {
+            return await GetResidentsLiteAsync(pageSize, pageIndex, null);
+        }
+
+        public async Task<IEnumerable<ResidentLiteDTO>> GetResidentsLiteAsync(int pageSize, int pageIndex, GetResidentsFiltersDTO filter)
+        {
+            return JsonConvert.DeserializeObject<List<ResidentLiteDTO>>(
+                await GetCallResidentsAsync(pageSize, pageIndex, filter, true));
+        }
+
+        private async Task<string> GetCallResidentsAsync(int pageSize, int pageIndex, GetResidentsFiltersDTO filter, bool lite)
+        {
             using (HttpClient httpClient = new HttpClient())
             {
                 string filterArgs = GetArguments(filter);
-                string url = ServerUrl + "api/Residents?pageIndex=" + pageIndex +
+                string url = ServerUrl + "api/residents" + (lite ? "/lite" : string.Empty) + "?pageIndex=" + pageIndex +
                     "&pageSize=" + pageSize +
                     (string.IsNullOrEmpty(filterArgs) ? string.Empty : ("&" + filterArgs));
 
-                return JsonConvert.DeserializeObject<List<ResidentDTO>>(
-                    await httpClient.GetStringAsync(url));
+                return await httpClient.GetStringAsync(url);
             }
         }
 
@@ -52,7 +78,7 @@ namespace Dramonkiller.CareHomeApp.WebServerProxy.Impl
             using (HttpClient httpClient = new HttpClient())
             {
                 string filterArgs = GetArguments(filter);
-                string url = ServerUrl + "api/Residents/Count" + (string.IsNullOrEmpty(filterArgs) ? string.Empty : ("?" + filterArgs));
+                string url = ServerUrl + "api/residents/Count" + (string.IsNullOrEmpty(filterArgs) ? string.Empty : ("?" + filterArgs));
 
                 string result = await httpClient.GetStringAsync(url);
 
@@ -64,7 +90,7 @@ namespace Dramonkiller.CareHomeApp.WebServerProxy.Impl
         {
             using (HttpClient httpClient = new HttpClient())
             {
-                return JsonConvert.DeserializeObject<ResidentDTO>(await httpClient.GetStringAsync(ServerUrl + "api/Residents/" + residentId));
+                return JsonConvert.DeserializeObject<ResidentDTO>(await httpClient.GetStringAsync(ServerUrl + "api/residents/" + residentId));
             }
         }
 

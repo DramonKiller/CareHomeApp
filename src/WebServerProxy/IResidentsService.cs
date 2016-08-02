@@ -8,9 +8,15 @@ namespace Dramonkiller.CareHomeApp.WebServerProxy
     {
         Task<IEnumerable<ResidentDTO>> GetAllResidentsAsync();
 
+        Task<IEnumerable<ResidentLiteDTO>> GetAllResidentsLiteAsync();
+
         Task<IEnumerable<ResidentDTO>> GetResidentsAsync(int pageSize, int pageIndex);
 
         Task<IEnumerable<ResidentDTO>> GetResidentsAsync(int pageSize, int pageIndex, GetResidentsFiltersDTO filters);
+
+        Task<IEnumerable<ResidentLiteDTO>> GetResidentsLiteAsync(int pageSize, int pageIndex);
+
+        Task<IEnumerable<ResidentLiteDTO>> GetResidentsLiteAsync(int pageSize, int pageIndex, GetResidentsFiltersDTO filters);
 
         Task<int> GetResidentCountAsync();
 

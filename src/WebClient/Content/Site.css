@@ -55,7 +55,7 @@
 
 .left-inner-addon-inline {
     position: relative;
-display: inline;
+    display: inline;
 }
 .left-inner-addon-inline input {
     padding-left: 30px;    
@@ -87,6 +87,9 @@ display: inline;
 
 .bold {
     font-weight: bold;
+}
+.position-absolute {
+    position: absolute;
 }
 
 .no-padding {

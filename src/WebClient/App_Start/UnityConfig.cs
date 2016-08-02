@@ -1,8 +1,7 @@
-using System;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Configuration;
 using Dramonkiller.CareHomeApp.WebServerProxy;
 using Dramonkiller.CareHomeApp.WebServerProxy.Impl;
+using Microsoft.Practices.Unity;
+using System;
 
 namespace Dramonkiller.CareHomeApp.WebClient.App_Start
 {
@@ -39,6 +38,7 @@ namespace Dramonkiller.CareHomeApp.WebClient.App_Start
 
             // TODO: Register your types here
             container.RegisterType<IResidentsService, ResidentsService>();
+            container.RegisterInstance(AutoMapperConfig.Mapper); 
         }
     }
 }

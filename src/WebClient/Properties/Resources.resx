@@ -171,4 +171,7 @@
   <data name="CurrentFilters" xml:space="preserve">
     <value>Current filters</value>
   </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
 </root>

@@ -12,6 +12,7 @@ namespace Dramonkiller.CareHomeApp.WebClient
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfig.Initialize();
             UnityWebActivator.Start();
         }
     }

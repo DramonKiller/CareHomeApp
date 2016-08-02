@@ -23,10 +23,21 @@ namespace Dramonkiller.CareHomeApp.WebClient.ViewModels
         [Display(Name = nameof(FullName), ResourceType = typeof(Resources))]
         public string FullName { get; set; }
 
+        public string DocumentId { get; set; }
+
         [Display(Name = nameof(Birthdate), ResourceType = typeof(Resources))]
         public DateTime? Birthdate { get; set; }
 
         [Display(Name = nameof(Age), ResourceType = typeof(Resources))]
         public int? Age { get; set; }
+
+        //public GenderDTO? Gender { get; set; }
+
+        [Display(Name = nameof(Notifications), ResourceType = typeof(Resources))]
+        public string Notifications { get; set; }
+
+        public bool HasNotifications { get; set; }
+
+        public string Comments { get; set; }
     }
 }

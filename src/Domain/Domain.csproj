@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Entities\General\CareHome.cs" />
     <Compile Include="Entities\IEntityBase.cs" />
+    <Compile Include="Entities\Residents\Gender.cs" />
     <Compile Include="Entities\Residents\Resident.cs" />
     <Compile Include="Entities\Residents\ResidentPhoto.cs" />
     <Compile Include="Infrastructure\IEntityBaseRepository.cs" />

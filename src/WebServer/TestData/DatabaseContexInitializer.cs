@@ -29,6 +29,8 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "Borja",
                 Middle = "Món",
                 Surname = "de York",
+                DocumentId = "12345678Z",
+                Notifications = "He is diabetic",
                 PhotoData = new ResidentPhoto { Photo = ImageResources.RES0002.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
@@ -51,6 +53,7 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "Hilaria",
                 Middle = "Conejo",
                 Surname = "Santo",
+                DocumentId = "z2222222x",
                 PhotoData = new ResidentPhoto { Photo = ImageResources.RES0001.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
@@ -81,6 +84,7 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "Pere",
                 Middle = "Gil",
                 Surname = "Gil",
+                Notifications = "He is diabetic",
                 PhotoData = new ResidentPhoto { Photo = ImageResources.RES0004.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
@@ -124,6 +128,7 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "Francisco",
                 Middle = "Lorinco",
                 Surname = "Lorado",
+                DocumentId = "v3232323232x",
                 PhotoData = new ResidentPhoto { Photo = ImageResources.RES0006.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
@@ -178,6 +183,8 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "José Luis",
                 Middle = "Lamata",
                 Surname = "Feliz",
+                DocumentId = "xxxxxx",
+                Notifications = "He is diabetic",
             };
 
             context.Residents.Add(resident15);
@@ -231,6 +238,7 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "Ramona",
                 Middle = "Ponte",
                 Surname = "Alegre",
+                DocumentId = "34er4r4",
                 PhotoData = new ResidentPhoto { Photo = ImageResources.RES0014.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
@@ -242,6 +250,7 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "Antonio",
                 Middle = "Suelta",
                 Surname = "Melo",
+                Notifications = "aaaa aaaaaa a aaaaa",
                 PhotoData = new ResidentPhoto { Photo = ImageResources.RES0015.Resize(ImageSize, ImageSize).ToByteArray() }
             };
 
@@ -263,6 +272,7 @@ namespace Dramonkiller.CareHomeApp.Core.Models.Initializer
                 Name = "Fernando",
                 Middle = "Coco",
                 Surname = "Cuadrado",
+                Notifications = "blablabla",
             };
 
             context.Residents.Add(resident23);

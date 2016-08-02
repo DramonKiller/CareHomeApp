@@ -1,4 +1,5 @@
-﻿using Dramonkiller.CareHomeApp.Utilities.Extensions;
+﻿using AutoMapper;
+using Dramonkiller.CareHomeApp.Utilities.Extensions;
 using Dramonkiller.CareHomeApp.WebClient.Extensions;
 using Dramonkiller.CareHomeApp.WebClient.ViewModels;
 using Dramonkiller.CareHomeApp.WebClient.ViewModels.Residents;
@@ -16,11 +17,22 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
 {
     public class ResidentsController : Controller
     {
+        public const string ControllerName = "Residents";
+
+        public const string IndexAction = "Index";
+
+        public const string EditAction = "Edit";
+
+        public const string DeleteAction = "Delete";
+
         private IResidentsService residentService;
 
-        public ResidentsController(IResidentsService residentService)
+        private IMapper mapper;
+
+        public ResidentsController(IResidentsService residentService, IMapper mapper)
         {
             this.residentService = residentService;
+            this.mapper = mapper;
         }
 
         // GET: Residents
@@ -28,7 +40,7 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
         {
             const int pageSize = 18;
 
-            IEnumerable<ResidentDTO> residents;
+            IEnumerable<ResidentLiteDTO> residents;
             int count;
             pageIndex = pageIndex ?? 1;
             GetResidentsFiltersDTO filtersDTO = new GetResidentsFiltersDTO()
@@ -44,8 +56,7 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
                 pageIndex = 1;
             }
 
-            residents = await residentService.GetResidentsAsync(pageSize, pageIndex.Value, filtersDTO);
-            
+            residents = await residentService.GetResidentsLiteAsync(pageSize, pageIndex.Value, filtersDTO);
 
             List<string> filters = new List<string>();
 
@@ -68,7 +79,7 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
                 FilterCode = filterCode,
                 PageIndex = pageIndex.Value,
                 FilterString = string.Join("; ", filters),
-                Residents = residents.Select(r => ConvertResidentToViewModel(r)).ToPagedList(pageIndex.Value, pageSize, count) as IPagedList<ResidentViewModel>
+                Residents = residents.Select(r => mapper.Map<ResidentViewModel>(r)).ToPagedList(pageIndex.Value, pageSize, count) as IPagedList<ResidentViewModel>
             };
 
             return View(viewModel);
@@ -88,28 +99,7 @@ namespace Dramonkiller.CareHomeApp.WebClient.Controllers
                 return HttpNotFound();
             }
 
-            return View(ConvertResidentToViewModel(resident));
-        }
-
-        private ResidentViewModel ConvertResidentToViewModel(ResidentDTO resident)
-        {
-            if (resident == null)
-            {
-                return null;
-            }
-
-            ResidentViewModel residentViewModel = 
-                new ResidentViewModel()
-                {
-                    Id = resident.Id,
-                    Code = resident.Code, 
-                    Name = resident.Name,
-                    Middle = resident.Middle,
-                    Surname = resident.Surname,
-                    FullName = resident.FullName 
-                };
-
-            return residentViewModel;
+            return View(mapper.Map<ResidentDTO>(resident));
         }
     }
 }
